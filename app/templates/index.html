@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Makes a Hit? - Spotify Music Analysis and Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-brand">HitPredictor</div>
+    </nav>
+
+<main class="hero">
+  <div class="hero-content">
+    <span class="hero-badge">Powered by Machine Learning</span>
+    <h1>What Makes a Hit?</h1>
+    <p class="subtitle">
+      Upload your song's audio features and find out if it has 
+      the potential of becoming a hit or a flop!
+    </p>
+    <a href="/predict" class="btn-primary">Analyze My Song →</a>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-number">80,398</span>
+        <span class="stat-label">Unique Songs Trained On</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">69%</span>
+        <span class="stat-label">Prediction Accuracy</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">4</span>
+        <span class="stat-label">Popularity Tiers</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="{{ url_for('static', filename='hero-bg.jpg') }}" 
+         alt="Person enjoying music with headphones" />
+  </div>
+</main>
+
+
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <p class="section-subtitle">
+            This predictive model was trained on a dataset of 80,398 unique Spotify tracks.
+            It analyses the key audio features of your song and compares them to the patterns found in songs across all 4 popularity tiers.
+            It identifies your song's most likely popularity tier with 69% accuracy, and gives you insights on your song. </p>
+
+        <div class="steps">
+            <div class="step">
+                <span class="step-number">01</span>
+                <h3>Enter Your Song Details</h3>
+                <p>Input your artist name and your song's audio features.
+                Not sure how to get these? Use
+                <a href="https://tunebat.com" target="_blank">Tunebat</a> or 
+                <a href="https://open.spotify.com" target="_blank">Spotify for Artists</a> 
+                to find them.</p>
+            </div>
+
+        <div class="step">
+            <span class="step-number">02</span>
+            <h3>The Model Analyses </h3>
+            <p>This model is a Random Forest Classifier that was trained on real spotify data. 
+                It examines 10 audio features simultanueusly to identify patterns that match known hit songs.</p>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">03</span>
+            <h3>Get Your Prediction</h3>
+            <p>Find out if your song has the potential to be a hit with a probability breakdown that shows 
+            how confident the model is across all 4 tiers.</p>
+        </div>
+     </div>
+        <div class="how-image">
+        <img src="{{ url_for('static', filename='studio.jpg') }}" 
+         alt="Music producer in studio" />
+        </div> 
+   </section>
+
+<section class="tiers">
+    <h2>The 4 Popularity Tiers</h2>
+    <p class="section-subtitle">
+         Spotify popularity scores range from 0 to 100. Here is what each tier means in the real world.
+    </p>
+
+    <div class="tier-cards">
+          <div class="tier-card viral">
+               <h3>Viral</h3>
+               <span class="tier-score">80-100</span>
+          <p>The top 1% of all songs on Spotify.
+            These tracks are the most streamed and widely recognized, often dominating charts and playlists.
+            And only 953 songs in the dataset reached this tier.</p>
+    </div>
+
+    <div class="tier-card hit">
+        <h3>Hit</h3>
+        <span class="tier-score">50-79</span>
+        <p>These songs are well-known and frequently streamed, often featured in playlists and radio rotations. 
+            They have a strong fanbase and consistent streaming numbers.</p>
+    </div>
+
+    <div class="tier-card mid">
+        <h3>Mid</h3>
+        <span class="tier-score">20-49</span>
+        <p>These tracks have dedicated listeners and moderate streaming numbers. But they haven't broken into mainstream
+            popularity yet. They are often strong within a specific genre or reginonal market.</p>
+    </div>
+
+    <div class="tier-card flop">
+        <h3>Flop</h3>
+        <span class="tier-score">0-19</span>
+        <p>These tracks have low streaming numbers and limited recognition.
+           14% of the songs never find an audience. And once a song lands here, it almost never recovers.</p>
+    </div>
+  </div>
+</section>
+
+<section class="glossary">
+    <h2>Understanding Your Audio Features</h2>
+    <p class="section-subtitle">
+        These are the 10 audio features the model uses to analyse your song. You can find these values for any exisiting song
+        on <a href="https://tunebat.com" target="_blank">Tunebat.com</a>.
+    </p>
+    <div class="glossary-grid">
+        <div class="glossary-item">
+            <h3>Danceability</h3>
+            <p>How easy is it to dance to this song? It is measured on a scale from 0 to 1.
+            0 means completely undanceable, 1 means built for the dance floor.</p>
+        </div>
+        <div class="glossary-item">
+            <h4>Energy</h4>
+            <p>How energetic is the song? It is measured on a scale from 0 to 1.
+            0 means completely calm, 1 means extremely high energy.</p>
+        </div>
+        <div class="glossary-item">
+            <h4>Speechiness</h4>
+            <p>How much does the song sound like talking? 0 means no speech, 1 means only speech.</p>
+        </div>
+        <div class="glossary-item">
+            <h4>Acousticness</h4>
+            <p>How acoustic is the song? 0 means not acoustic at all, 1 means completely acoustic.</p>
+        </div>
+        <div class="glossary-item">
+            <h4>Instrumentalness</h4>
+            <p>How instrumental is the song? 0 means it has vocals, 1 means it is purely instrumental.</p>
+        </div>
+        <div class="glossary-item">
+            <h4>Loudness</h4>
+            <p>How loud is the song? This is measured in decibels (dB), it typically ranges from -60 dB (quiet) to 0 dB (loud).</p>
+        </div>
+        <div class="glossary-item">
+            <h4>Tempo</h4>
+            <p>How fast is the song? It is measured in beats per minute (BPM), it indicates the speed of the track.</p>
+        </div>
+        <div class="glossary-item">
+            <h4>Duration</h4>
+            <p>How long is the song? The sweet spot for Spotify hits is between 2.5 and 4 minutes.</p>
+        </div> 
+        <div class="glossary-item">
+            <h4>Genre</h4>
+            <p>What genre does the song belong to?  Genre is the single strongest predictor of popularity in this model</p>
+        </div>
+        <div class="glossary-item">
+            <h4>Valence</h4>
+               <p>How happy or sad does the song sound? 0 is dark and melancholic, 1 is cheerful and euphoric.</p>
+        </div>
+    </div>
+</section>
+
+
+<section class="honest-section">
+    <h2>What This Predictor Does and Doesn't Do</h2>
+    <div class="honest-grid">
+        <div class="honest-item">
+            <h3>What It Does</h3>
+            <ul>
+                <li>Provides a data-driven prediction of your song's popularity tier based on its audio features.</li>
+                <li>Offers insights into which features are most influential in determining popularity.</li>
+                <li>Helps you understand how your song compares to existing hits and flops.</li>
+            </ul>
+        </div>
+
+        <div class="honest-item">
+            <h3>What It Doesn't Do</h3>
+            <ul>
+                <li>It doesn't guarantee that your song will be a hit or a flop. It's a prediction based on patterns in the data.</li>
+                <li>It doesn't account for external factors like marketing, timing, viral moments driven by Tiktok or cultural trends that can influence a song's success.</li>
+                <li>It doesn't measure the artistic quality or emotional impact of your song, which are also important for success.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<section class="cta-section">
+    <h2>Are You Ready To Analyze Your Song?</h2>
+    <p>If you are an artist, producer, or simply a music lover, you can use data to understand what makes a song connect with audiences on Spotify.</p>
+    <a href="/predict" class="btn-primary">
+       Analyze My Song Now →
+    </a>
+</section>
+
+
+ <footer>
+        <p> HitPredictor - Built with 80,398 Spotify tracks</p>
+        <p>A Data Science Project by Ifeoluwa</p>
+    </footer>
+</body>
+</html>
