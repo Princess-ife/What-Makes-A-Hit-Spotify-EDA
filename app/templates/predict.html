@@ -3,144 +3,383 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predict Your Song's Popularity</title>
+    <title>Predict Your Song - HitPredictor</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+
     <nav>
         <div class="nav-brand">HitPredictor</div>
+        <a href="/" class="nav-back">← Back to Home</a>
     </nav>
 
-    <main class="predict-hero">
-        <h1>Predict Your Song's Popularity</h1>
-        <p class="subtitle">
-            Enter your song's audio features and find out if it has the potential to be a hit or a flop!
-        </p>
+    <main class="predict-page">
 
+        <div class="predict-hero">
+            <span class="hero-badge">Machine Learning</span>
+            <h1>Predict Your Song's Popularity</h1>
+            <p class="subtitle">
+                Enter your song's audio features and find out if it has the potential to be a hit or a flop!
+                If you're not sure of the values, look them up on <a href="https://tunebat.com" target="_blank">Tunebat.com</a>.
+            </p>
+        </div>
 
-        <form action="/predict" method="post" class="predict-form">
-            <div class="form-group">
-                <label for="artist">Artist Name</label>
-                <input type="text" id="artist" name="artist" placeholder="e.g. Burna Boy" required>
+        <form id="predictForm" class="predict-form">
+
+            <div class="form-card">
+                <div class="form-card-header">
+                    <span class="form-card-icon">🎤</span>
+                    <div>
+                        <h3>Song Identity</h3>
+                        <p>Basic details about your track</p>
+                    </div>
+                </div>
+                <div class="form-fields">
+                    <div class="form-group">
+                        <label for="artist">Artist Name</label>
+                        <input type="text" id="artist" name="artist" 
+                               placeholder="e.g. Burna Boy" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="genre">Genre</label>
+                        <select id="genre" name="genre" required>
+                            <option value="">Select a genre</option>
+                            <option value="acoustic">Acoustic</option>
+                            <option value="afrobeat">Afrobeat</option>
+                            <option value="alt-rock">Alt-Rock</option>
+                            <option value="alternative">Alternative</option>
+                            <option value="ambient">Ambient</option>
+                            <option value="anime">Anime</option>
+                            <option value="black-metal">Black Metal</option>
+                            <option value="bluegrass">Bluegrass</option>
+                            <option value="blues">Blues</option>
+                            <option value="brazil">Brazil</option>
+                            <option value="breakbeat">Breakbeat</option>
+                            <option value="british">British</option>
+                            <option value="cantopop">Cantopop</option>
+                            <option value="chicago-house">Chicago House</option>
+                            <option value="children">Children</option>
+                            <option value="chill">Chill</option>
+                            <option value="classical">Classical</option>
+                            <option value="club">Club</option>
+                            <option value="comedy">Comedy</option>
+                            <option value="country">Country</option>
+                            <option value="dance">Dance</option>
+                            <option value="dancehall">Dancehall</option>
+                            <option value="death-metal">Death Metal</option>
+                            <option value="deep-house">Deep House</option>
+                            <option value="detroit-techno">Detroit Techno</option>
+                            <option value="disco">Disco</option>
+                            <option value="disney">Disney</option>
+                            <option value="drum-and-bass">Drum and Bass</option>
+                            <option value="dub">Dub</option>
+                            <option value="dubstep">Dubstep</option>
+                            <option value="edm">EDM</option>
+                            <option value="electro">Electro</option>
+                            <option value="electronic">Electronic</option>
+                            <option value="emo">Emo</option>
+                            <option value="folk">Folk</option>
+                            <option value="forro">Forro</option>
+                            <option value="french">French</option>
+                            <option value="funk">Funk</option>
+                            <option value="garage">Garage</option>
+                            <option value="german">German</option>
+                            <option value="gospel">Gospel</option>
+                            <option value="goth">Goth</option>
+                            <option value="grindcore">Grindcore</option>
+                            <option value="groove">Groove</option>
+                            <option value="grunge">Grunge</option>
+                            <option value="guitar">Guitar</option>
+                            <option value="happy">Happy</option>
+                            <option value="hard-rock">Hard Rock</option>
+                            <option value="hardcore">Hardcore</option>
+                            <option value="hardstyle">Hardstyle</option>
+                            <option value="heavy-metal">Heavy Metal</option>
+                            <option value="hip-hop">Hip-Hop</option>
+                            <option value="honky-tonk">Honky Tonk</option>
+                            <option value="house">House</option>
+                            <option value="idm">IDM</option>
+                            <option value="indian">Indian</option>
+                            <option value="indie">Indie</option>
+                            <option value="indie-pop">Indie Pop</option>
+                            <option value="industrial">Industrial</option>
+                            <option value="iranian">Iranian</option>
+                            <option value="j-dance">J-Dance</option>
+                            <option value="j-idol">J-Idol</option>
+                            <option value="j-pop">J-Pop</option>
+                            <option value="j-rock">J-Rock</option>
+                            <option value="jazz">Jazz</option>
+                            <option value="k-pop">K-Pop</option>
+                            <option value="kids">Kids</option>
+                            <option value="latin">Latin</option>
+                            <option value="malay">Malay</option>
+                            <option value="mandopop">Mandopop</option>
+                            <option value="metal">Metal</option>
+                            <option value="metalcore">Metalcore</option>
+                            <option value="minimal-techno">Minimal Techno</option>
+                            <option value="mpb">MPB</option>
+                            <option value="new-age">New Age</option>
+                            <option value="opera">Opera</option>
+                            <option value="pagode">Pagode</option>
+                            <option value="party">Party</option>
+                            <option value="piano">Piano</option>
+                            <option value="pop">Pop</option>
+                            <option value="pop-film">Pop Film</option>
+                            <option value="power-pop">Power Pop</option>
+                            <option value="progressive-house">Progressive House</option>
+                            <option value="psych-rock">Psych Rock</option>
+                            <option value="punk">Punk</option>
+                            <option value="punk-rock">Punk Rock</option>
+                            <option value="r-n-b">R&amp;B</option>
+                            <option value="reggae">Reggae</option>
+                            <option value="reggaeton">Reggaeton</option>
+                            <option value="rock">Rock</option>
+                            <option value="rock-n-roll">Rock n Roll</option>
+                            <option value="rockabilly">Rockabilly</option>
+                            <option value="romance">Romance</option>
+                            <option value="sad">Sad</option>
+                            <option value="salsa">Salsa</option>
+                            <option value="samba">Samba</option>
+                            <option value="sertanejo">Sertanejo</option>
+                            <option value="show-tunes">Show Tunes</option>
+                            <option value="singer-songwriter">Singer-Songwriter</option>
+                            <option value="ska">Ska</option>
+                            <option value="soul">Soul</option>
+                            <option value="spanish">Spanish</option>
+                            <option value="study">Study</option>
+                            <option value="swedish">Swedish</option>
+                            <option value="synth-pop">Synth Pop</option>
+                            <option value="tango">Tango</option>
+                            <option value="techno">Techno</option>
+                            <option value="trance">Trance</option>
+                            <option value="trip-hop">Trip Hop</option>
+                            <option value="turkish">Turkish</option>
+                            <option value="world-music">World Music</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Duration (minutes)</label>
+                        <input type="number" id="duration" name="duration" 
+                               placeholder="e.g. 3.5" step="0.1" min="0" required>
+                        <span class="field-hint">Sweet spot: 2.5 – 4 minutes</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="genre">Genre</label>
-                <select id="genre" name="genre" required>
-                    <option value="">Select a genre</option>
-                    <option value="pop">Pop</option>
-                    <option value="rock">Rock</option>
-                    <option value="hip-hop">Hip-Hop</option>
-                    <option value="electronic">Electronic</option>
-                    <option value="r&b">R&B</option>
-                    <option value="country">Country</option>
-                    <option value="latin">Latin</option>
-                    <option value="reggae">Reggae</option>
-                    <option value="jazz">Jazz</option>
-                    <option value="classical">Classical</option>
-                    <option value="gospel">Gospel</option>
-                    <option value="folk">Folk</option>
-                    <option value="afrobeats">Afrobeats</option>
-                    <option value="k-pop">K-Pop</option>
-                    <option value="other">Other</option>
-                </select>
+            <div class="form-card">
+                <div class="form-card-header">
+                    <div>
+                        <h3>Rhythm & Energy</h3>
+                        <p>How your track moves and drives</p>
+                    </div>
+                </div>
+                <div class="form-fields">
+                    <div class="form-group">
+                        <label for="danceability">Danceability (0 - 100)</label>
+                        <input type="number" id="danceability" name="danceability" 
+                               placeholder="e.g. 80" step="1" min="0" max="100" required>
+                        <span class="field-hint">0 = undanceable, 100 = built for the floor</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="energy">Energy (0 - 100)</label>
+                        <input type="number" id="energy" name="energy" 
+                               placeholder="e.g. 56" step="1" min="0" max="100" required>
+                        <span class="field-hint">0 = calm, 100 = intense</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="tempo">Tempo (BPM)</label>
+                        <input type="number" id="tempo" name="tempo" 
+                               placeholder="e.g. 120" step="0.1" min="0" required>
+                        <span class="field-hint">Beats per minute</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="danceability">Danceability (0.0 - 1.0)</label>
-                <input type="number" id="danceability" name="danceability" step="0.01" min="0" max="1" required>
+            <div class="form-card">
+                <div class="form-card-header">
+                    <div>
+                        <h3>Mood & Feel</h3>
+                        <p>The emotional character of your track</p>
+                    </div>
+                </div>
+                <div class="form-fields">
+                    <div class="form-group">
+                        <label for="explicit_genre">Explicit Content</label>
+                        <select id="explicit_genre" name="explicit_genre" required>
+                            <option value="">Select one</option>
+                            <option value="0">No — clean lyrics</option>
+                            <option value="1">Yes — explicit lyrics</option>
+                        </select>
+                        <span class="field-hint">Does the song contain explicit language?</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="acousticness">Acousticness (0 - 100)</label>
+                        <input type="number" id="acousticness" name="acousticness" 
+                               placeholder="e.g. 13" step="1" min="0" max="100" required>
+                        <span class="field-hint">0 = not acoustic, 100 = fully acoustic</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="energy">Energy (0.0 - 1.0)</label>
-                <input type="number" id="energy" name="energy" step="0.01" min="0" max="1" required>
+            <div class="form-card">
+                <div class="form-card-header">
+                    <div>
+                        <h3>Technical Features</h3>
+                        <p>Production and structure details</p>
+                    </div>
+                </div>
+                <div class="form-fields">
+                    <div class="form-group">
+                        <label for="loudness">Loudness (dB)</label>
+                        <input type="number" id="loudness" name="loudness" 
+                               placeholder="e.g. -5.0" step="0.1" required>
+                        <span class="field-hint">Typically –60 dB (quiet) to 0 dB (loud)</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="speechiness">Speechiness (0 - 100)</label>
+                        <input type="number" id="speechiness" name="speechiness" 
+                               placeholder="e.g. 9" step="1" min="0" max="100" required>
+                        <span class="field-hint">0 = no speech, 100 = spoken word</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="instrumentalness">Instrumentalness (0 - 100)</label>
+                        <input type="number" id="instrumentalness" name="instrumentalness" 
+                               placeholder="e.g. 0" step="1" min="0" max="100" required>
+                        <span class="field-hint">0 = has vocals, 100 = purely instrumental</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="loudness">Loudness (dB)</label>
-                <input type="number" id="loudness" name="loudness" step="0.1" required>
-            </div>
-
-            <div class="form-group">
-                <label for="valence">Valence (0.0 - 1.0)</label>
-                <input type="number" id="valence" name="valence" step="0.01" min="0" max="1" required>
-            </div>
-
-            <div class="form-group">
-                <label for="tempo">Tempo (BPM)</label>
-                <input type="number" id="tempo" name="tempo" step="0.1" required>
-            </div>
-
-             <div class="form-group">
-                <label for="duration">Duration (minutes)</label>
-                <input type="number" id="duration" name="duration" placeholder="e.g. 3.5" step="0.1" required>
-            </div>
-
-             <div class="form-group">
-                <label for="instrumentalness">Instrumentalness (0.0 - 1.0)</label>
-                <input type="number" id="instrumentalness" name="instrumentalness" step="0.01" min="0" max="1" required>
-            </div>
-
-             <div class="form-group">
-                <label for="speechiness">Speechiness (0.0 - 1.0)</label>
-                <input type="number" id="speechiness" name="speechiness" step="0.01" min="0" max="1" required>
-            </div>
-
-             <div class="form-group">
-               <label>Acousticness (0.0 - 1.0)</label>
-                <input type="number" id="acousticness" name="acousticness" step="0.01" min="0" max="1" required>
-            </div>
-
-            <div style="grid-column: span 2; text-align: center; margin-top: 20px;">
-                <button type="submit" class="btn-primary" style="border:none; cursor:pointer;">
+            <div class="predict-submit">
+                <button type="submit" class="btn-predict">
                     Predict Popularity →
                 </button>
+                <p class="submit-hint">Takes less than a second</p>
             </div>
+
         </form>
     </main>
 
     <div id="resultModal" class="modal">
         <div class="modal-content">
-            <span class="close-button"onclick="closeModal()">&times;</span>
-            <div id="modalLoading">Analysing patterns...</div>
-            <div id="modalBody" style="display:none;"></div>
-                <h2 id="predictionResult" style="font-size: 3rem; margin: 1rem 0;">VIRAL</h2>
-                <p id="predictionText" style="color: var(--text-secondary-color);"></p>
-          </div>
+            <button class="close-button" onclick="closeModal()">✕</button>
+
+            <div id="modalLoading" class="modal-loading">
+                <div class="loading-spinner"></div>
+                <p>Analysing patterns...</p>
+            </div>
+
+            <div id="modalBody" style="display:none;">
+
+                <div id="artistImageContainer" class="artist-image-container" style="display:none;">
+                    <img id="artistImage" class="artist-image" src="" alt="" />
+                    <p id="artistNameLabel" class="artist-name-label"></p>
+                </div>
+
+                <h2 id="predictionResult" class="prediction-result"></h2>
+                <p id="predictionText" class="prediction-text"></p>
+
+                <p class="modal-disclaimer">
+                    ⚠️ Accuracy varies by genre. Genres like Afrobeats, Turkish, 
+                    Trance and other regional styles are underrepresented in the 
+                    training data and may score lower than expected.
+                </p>
+
+                <div class="probability-bars" id="probabilityBars"></div>
+
+                <button class="btn-primary" onclick="closeModal()" 
+                        style="margin-top: 2rem; border: none; cursor: pointer; width: 100%;">
+                    Analyse Another Song →
+                </button>
+            </div>
         </div>
     </div>
 
-    
     <script>
         const form = document.getElementById('predictForm');
         const modal = document.getElementById('resultModal');
 
+        const tierColors = {
+            viral: 'var(--viral-color)',
+            hit: 'var(--hit-color)',
+            mid: 'var(--mid-color)',
+            flop: 'var(--flop-color)'
+        };
+
         form.onsubmit = async (e) => {
             e.preventDefault();
-            modal.style.display = "block";
+
+            modal.style.display = 'flex';
+            document.getElementById('modalLoading').style.display = 'flex';
+            document.getElementById('modalBody').style.display = 'none';
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                const tier = result.tier ? result.tier.toLowerCase() : result.prediction.toLowerCase();
+
+                document.getElementById('modalLoading').style.display = 'none';
+                document.getElementById('modalBody').style.display = 'block';
+console.log(result)
+                if (result.artist_image) {
+                    document.getElementById('artistImage').src = result.artist_image;
+                    document.getElementById('artistImage').alt = result.artist_name;
+                    document.getElementById('artistNameLabel').textContent = result.artist_name;
+                    document.getElementById('artistImageContainer').style.display = 'block';
+                } else {
+                    document.getElementById('artistImageContainer').style.display = 'none';
+                }
 
 
-            const formData = new FormData(form);
-            const response = await fetch('/predict', {
-                method: 'POST',
-                body: formData
-            });
+                const resultEl = document.getElementById('predictionResult');
+                resultEl.textContent = result.prediction;
+                resultEl.style.color = tierColors[tier] || 'var(--accent-color)';
 
-            const result = await response.json();
-            document.getElementById('modalLoading').style.display = 'none';
-            document.getElementById('modalBody').style.display = 'block';
-            document.getElementById('predictionResult').textContent = result.prediction;
-            document.getElementById('predictionText').textContent = result.explanation;
+                document.getElementById('predictionText').textContent = result.explanation || '';
 
-            document.getElementById('predictionResult').style.color = `var(--${result.tier.toLowerCase()}-color)`;
+                if (result.probabilities) {
+                    const barsEl = document.getElementById('probabilityBars');
+                    barsEl.innerHTML = '';
+                    const tiers = ['viral', 'hit', 'mid', 'flop'];
+                    tiers.forEach(t => {
+                        const pct = Math.round((result.probabilities[t] || 0) * 100);
+                        barsEl.innerHTML += `
+                            <div class="prob-row">
+                                <span class="prob-label">${t.charAt(0).toUpperCase() + t.slice(1)}</span>
+                                <div class="prob-bar-track">
+                                    <div class="prob-bar-fill" 
+                                         style="width:${pct}%; background:${tierColors[t]}">
+                                    </div>
+                                </div>
+                                <span class="prob-pct">${pct}%</span>
+                            </div>`;
+                    });
+                }
+
+            } catch (err) {
+                document.getElementById('modalLoading').style.display = 'none';
+                document.getElementById('modalBody').style.display = 'block';
+                document.getElementById('predictionResult').textContent = 'Something went wrong.';
+                document.getElementById('predictionText').textContent = 
+                    'Please check your inputs and try again.';
+            }
         };
 
         function closeModal() {
-            modal.style.display = "none";
-            document.getElementById('modalLoading').style.display = 'block';
+            modal.style.display = 'none';
+            document.getElementById('modalLoading').style.display = 'flex';
             document.getElementById('modalBody').style.display = 'none';
-        } 
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
     </script>
+
 </body>
 </html>
-

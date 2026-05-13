@@ -57,7 +57,7 @@
                 <span class="step-number">01</span>
                 <h3>Enter Your Song Details</h3>
                 <p>Input your artist name and your song's audio features.
-                Not sure how to get these? Use
+                if you're not sure how to get these, use
                 <a href="https://tunebat.com" target="_blank">Tunebat</a> or 
                 <a href="https://open.spotify.com" target="_blank">Spotify for Artists</a> 
                 to find them.</p>
@@ -130,25 +130,25 @@
     <div class="glossary-grid">
         <div class="glossary-item">
             <h3>Danceability</h3>
-            <p>How easy is it to dance to this song? It is measured on a scale from 0 to 1.
-            0 means completely undanceable, 1 means built for the dance floor.</p>
+            <p>How easy is it to dance to this song? It is measured on a scale from 0 to 100.
+            0 means completely undanceable, 100 means built for the dance floor.</p>
         </div>
         <div class="glossary-item">
             <h4>Energy</h4>
-            <p>How energetic is the song? It is measured on a scale from 0 to 1.
-            0 means completely calm, 1 means extremely high energy.</p>
+            <p>How energetic is the song? It is measured on a scale from 0 to 100.
+            0 means completely calm, 100 means extremely high energy.</p>
         </div>
         <div class="glossary-item">
             <h4>Speechiness</h4>
-            <p>How much does the song sound like talking? 0 means no speech, 1 means only speech.</p>
+            <p>How much does the song sound like talking? 0 means no speech, 100 means only speech.</p>
         </div>
         <div class="glossary-item">
             <h4>Acousticness</h4>
-            <p>How acoustic is the song? 0 means not acoustic at all, 1 means completely acoustic.</p>
+            <p>How acoustic is the song? 0 means not acoustic at all, 100 means completely acoustic.</p>
         </div>
         <div class="glossary-item">
             <h4>Instrumentalness</h4>
-            <p>How instrumental is the song? 0 means it has vocals, 1 means it is purely instrumental.</p>
+            <p>How instrumental is the song? 0 means it has vocals, 100 means it is purely instrumental.</p>
         </div>
         <div class="glossary-item">
             <h4>Loudness</h4>
@@ -164,11 +164,12 @@
         </div> 
         <div class="glossary-item">
             <h4>Genre</h4>
-            <p>What genre does the song belong to?  Genre is the single strongest predictor of popularity in this model</p>
+            <p>What genre does the song belong to? The model recognises 113 Spotify genres from acoustic and afrobeat to techno and world-music. Genre is the single strongest predictor of popularity in this model.</p>
         </div>
         <div class="glossary-item">
-            <h4>Valence</h4>
-               <p>How happy or sad does the song sound? 0 is dark and melancholic, 1 is cheerful and euphoric.</p>
+            <h4>Explicit Content</h4>
+            <p>Does the song contain explicit language? Combined with genre, 
+               this is one of the strongest signals the model uses to determine popularity tier.</p>
         </div>
     </div>
 </section>
