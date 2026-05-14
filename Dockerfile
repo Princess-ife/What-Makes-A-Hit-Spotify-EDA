@@ -6,13 +6,11 @@ ENV PATH="/home/user/.local/bin:$PATH"
 
 WORKDIR /app
 
-COPY --chown=user app/requirements.txt .
+COPY --chown=user requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY --chown=user app .
-
-RUN ls -la /app
+COPY --chown=user . .
 
 EXPOSE 7860
 
-CMD ["gunicorn", "--bind", "0.0.0.0:7860", "--timeout", "120", "--log-level", "debug", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:7860", "--timeout", "300", "--preload", "app:app"]
