@@ -13,26 +13,33 @@ app = Flask(__name__)
 
 HF_REPO = "Prifea/hit-predictor"
 
-def load_model_files():
-    model_path = 'hit_model_v3.pkl'
-    le_genre_path = 'le_genre_v3.pkl'
-    le_explicit_path = 'le_explicit_genre_v3.pkl'
+def download_pickle_file(filename_candidates):
+    for filename in filename_candidates:
+        if os.path.exists(filename):
+            return filename
 
-    if not os.path.exists(model_path):
-        model_path = hf_hub_download(
-            repo_id=HF_REPO,
-            filename="hit_model_v3.pkl", #
-        )
-    if not os.path.exists(le_genre_path):
-        le_genre_path = hf_hub_download(
-            repo_id=HF_REPO,
-            filename="le_genre_v3.pkl", 
-        )
-    if not os.path.exists(le_explicit_path):
-        le_explicit_path = hf_hub_download(
-            repo_id=HF_REPO,
-            filename="le_explicit_genre_v3.pkl", 
-        )
+    last_error = None
+    for filename in filename_candidates:
+        try:
+            return hf_hub_download(
+                repo_id=HF_REPO,
+                filename=filename,
+                repo_type="model",
+            )
+        except Exception as exc:
+            print(f"hf_hub_download failed for {filename}: {exc}")
+            last_error = exc
+
+    raise FileNotFoundError(
+        f"Could not load any of the model files: {filename_candidates}. "
+        f"Last error: {last_error}"
+    )
+
+
+def load_model_files():
+    model_path = download_pickle_file(["hit_model_v3.pkl", "what-makes-a-hit-model.pkl"])
+    le_genre_path = download_pickle_file(["le_genre_v3.pkl", "le_genre.pkl"])
+    le_explicit_path = download_pickle_file(["le_explicit_genre_v3.pkl", "le_explicit_genre.pkl"])
 
     with open(model_path, 'rb') as f:
         model = pickle.load(f)
