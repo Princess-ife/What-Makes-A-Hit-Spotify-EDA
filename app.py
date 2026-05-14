@@ -21,17 +21,17 @@ def load_model_files():
     if not os.path.exists(model_path):
         model_path = hf_hub_download(
             repo_id=HF_REPO,
-            filename="what-makes-a-hit-model.pkl",
+            filename="hit_model_v3.pkl", #
         )
     if not os.path.exists(le_genre_path):
         le_genre_path = hf_hub_download(
             repo_id=HF_REPO,
-            filename="le_genre.pkl",
+            filename="le_genre_v3.pkl", 
         )
     if not os.path.exists(le_explicit_path):
         le_explicit_path = hf_hub_download(
             repo_id=HF_REPO,
-            filename="le_explicit_genre.pkl",
+            filename="le_explicit_genre_v3.pkl", 
         )
 
     with open(model_path, 'rb') as f:
