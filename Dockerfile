@@ -6,7 +6,7 @@ ENV PATH="/home/user/.local/bin:$PATH"
 
 WORKDIR /app
 
-COPY --chown=user requirements.txt .
+COPY --chown=user app/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY --chown=user app .
