@@ -5,24 +5,31 @@ import requests
 import pandas as pd
 import os
 from dotenv import load_dotenv
+from huggingface_hub import hf_hub_download
 
 load_dotenv()
 
 app = Flask(__name__)
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODEL_PATH = os.path.join(BASE_DIR, 'what-makes-a-hit-model.pkl')
-LE_GENRE_PATH = os.path.join(BASE_DIR, 'le_genre.pkl')
-LE_EXPLICIT_GENRE_PATH = os.path.join(BASE_DIR, 'le_explicit_genre.pkl')
+HF_REPO = "Prifea/hit-predictor"
 
-with open(MODEL_PATH, 'rb') as f:
-    model = pickle.load(f)
+def load_model_files():
+    model_path = hf_hub_download(repo_id=HF_REPO, filename="what-makes-a-hit-model.pkl")
+    le_genre_path = hf_hub_download(repo_id=HF_REPO, filename="le_genre.pkl")
+    le_explicit_path = hf_hub_download(repo_id=HF_REPO, filename="le_explicit_genre.pkl")
 
-with open(LE_GENRE_PATH, 'rb') as f:
-    le_genre = pickle.load(f)
+    with open(model_path, 'rb') as f:
+        model = pickle.load(f)
+    with open(le_genre_path, 'rb') as f:
+        le_genre = pickle.load(f)
+    with open(le_explicit_path, 'rb') as f:
+        le_explicit_genre = pickle.load(f)
 
-with open(LE_EXPLICIT_GENRE_PATH, 'rb') as f:
-    le_explicit_genre = pickle.load(f)
+    return model, le_genre, le_explicit_genre
+
+print("Loading model files from Hugging Face...")
+model, le_genre, le_explicit_genre = load_model_files()
+print("Model loaded successfully!")
 
 TIER_EXPLANATIONS = {
     'Viral': 'This song has the audio profile of the top 1% of Spotify tracks. It shows strong patterns matching chart-dominating hits.',
