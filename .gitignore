@@ -1,0 +1,8 @@
+venv
+.env
+*.pkl
+spotify_deduplicated.csv
+spotify_eda_clean.csv
+__pycache__/
+.env
+Hit-Predictor/
