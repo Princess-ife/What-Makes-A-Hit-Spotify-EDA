@@ -2,8 +2,6 @@ from huggingface_hub import HfApi
 
 api = HfApi()
 
-api.create_repo(repo_id="Prifea/hit-predictor", repo_type="model")
-
 api.upload_file(
     path_or_fileobj=r"C:\Users\DELL\Desktop\what-makes-a-hit\app\what-makes-a-hit-model.pkl",
     path_in_repo="what-makes-a-hit-model.pkl",
@@ -25,4 +23,4 @@ api.upload_file(
     repo_type="model"
 )
 
-print("All files uploaded!")
+print("Correct models uploaded!")
